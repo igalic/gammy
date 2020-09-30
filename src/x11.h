@@ -6,19 +6,20 @@
 #ifndef X11_H
 #define X11_H
 
-#include <X11/Xlib.h>
+#include <xcb/xcb.h>
 #include <cstdint>
 #include <vector>
 
 class X11
 {
-	Display *dsp;
 
-	Screen *scr;
-	Window root;
+  xcb_connection_t *dsp;
+  xcb_screen_t *scr;
+  xcb_window_t root;
 
 	int ramp_sz;
 	int scr_num;
+  int crtc_num;
 
 	std::vector<uint16_t> init_ramp;
 	bool initial_ramp_exists = true;
@@ -26,6 +27,7 @@ class X11
 	unsigned w, h;
 
 	void fillRamp(std::vector<uint16_t> &ramp, const int brightness, const int temp);
+  xcb_screen_t *screenOfDisplay(int screen);
 
 	public:
 	X11();
@@ -35,6 +37,8 @@ class X11
 
 	void getSnapshot(std::vector<uint8_t> &buf) noexcept;
 	void setGamma(int brt, int temp);
+	void setGamma(int temp);
+
 	void setInitialGamma(bool set_previous);
 
 	~X11();
