@@ -13,13 +13,13 @@
 class X11
 {
 
-  xcb_connection_t *dsp;
-  xcb_screen_t *scr;
-  xcb_window_t root;
+	xcb_connection_t *dsp;
+	xcb_screen_t *scr;
+	xcb_window_t root;
 
 	int ramp_sz;
 	int scr_num;
-  int crtc_num;
+	int crtc_num;
 
 	std::vector<uint16_t> init_ramp;
 	bool initial_ramp_exists = true;
@@ -27,7 +27,7 @@ class X11
 	unsigned w, h;
 
 	void fillRamp(std::vector<uint16_t> &ramp, const int brightness, const int temp);
-  xcb_screen_t *screenOfDisplay(int screen);
+	xcb_screen_t *screenOfDisplay(int screen);
 
 	public:
 	X11();
